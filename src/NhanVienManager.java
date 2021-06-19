@@ -252,9 +252,6 @@ public class NhanVienManager {
         }
     }
 
-
-
-
     public void show() {
         System.out.println("______________________Danh sách nhân viên______________________");
         System.out.format("%20s %20s %40s %20s %20s %20s \n", "Mã nhân viên", "Họ tên", "Chức vụ", "Ngày sinh", "Giới tính", "Lương");

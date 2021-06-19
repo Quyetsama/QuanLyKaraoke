@@ -93,7 +93,6 @@ public class Karaoke {
 
                                 break;
                             case 5:
-
                                 System.out.println("1, Tên");
                                 System.out.println("2, Lương");
 
@@ -121,10 +120,76 @@ public class Karaoke {
                     break;
 
                 case 2:
+                    SanPhamManager managerSP = new SanPhamManager();
 
+                    boolean cont3 = true;
+                    do{
+                        System.out.println("___________________QUẢN LÝ SẢN PHẨM___________________");
+                        System.out.println("1, Thêm");
+                        System.out.println("2, Sửa");
+                        System.out.println("3, Xóa");
+                        System.out.println("4, Tìm kiếm");
+                        System.out.println("5, Sắp xếp");
+                        System.out.println("6, Hiển thị danh sách");
+                        System.out.println("7, Quay lại");
+
+                        int y = 0;
+                        y = sc.nextInt();
+                        switch (y){
+                            case 1:
+                                managerSP.Add();
+                                break;
+                            case 2:
+                                System.out.print("Nhập mã sản phẩm cần sửa: ");
+                                managerSP.Edit(sc.next());
+                                break;
+                            case 3:
+                                System.out.print("Nhập mã sản phẩm cần xóa: ");
+                                managerSP.Delete(sc.next());
+                                break;
+                            case 4:
+                                System.out.println("1, Mã sản phẩm");
+                                System.out.println("2, Tên");
+
+                                int z = 0;
+                                z = sc.nextInt();
+
+                                switch (z){
+                                    case 1:
+                                        System.out.print("Nhập mã sản phẩm cần tìm: ");
+                                        managerSP.FindMSP(sc.next());
+                                        break;
+                                    case 2:
+                                        System.out.print("Nhập tên sản phẩm cần tìm: ");
+                                        managerSP.FindName(sc.next());
+                                        break;
+                                }
+                                break;
+                            case 5:
+                                System.out.println("1, Tên");
+                                System.out.println("2, Đơn giá");
+
+                                int t = 0;
+                                t = sc.nextInt();
+
+                                switch (t){
+                                    case 1:
+                                        managerSP.SortSanPhamName();
+                                        break;
+                                    case 2:
+                                        managerSP.SortSanPhamPrice();
+                                        break;
+                                }
+                                break;
+                            case 6:
+                                managerSP.show();
+                                break;
+                            case 7:
+                                cont3= false;
+                                break;
+                        }
+                    }while (cont3);
                     break;
-
-
                 case 3:
 
                     break;
