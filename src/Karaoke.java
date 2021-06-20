@@ -195,6 +195,50 @@ public class Karaoke {
                     break;
 
                 case 4:
+
+                    HoaDonManager managerHD = new HoaDonManager();
+
+                    boolean cont5 = true;
+                    do{
+                        System.out.println("___________________QUẢN LÝ HÓA ĐƠN___________________");
+                        System.out.println("1, Thêm");
+                        System.out.println("2, Sửa");
+                        System.out.println("3, Xóa");
+                        System.out.println("4, Tìm kiếm");
+                        System.out.println("5, Sắp xếp (Thành tiền)");
+                        System.out.println("6, Hiển thị danh sách");
+                        System.out.println("7, Quay lại");
+
+                        int y = 0;
+                        y = sc.nextInt();
+                        switch (y){
+                            case 1:
+                                managerHD.Add();
+                                break;
+                            case 2:
+                                System.out.print("Nhập mã hóa đơn cần sửa: ");
+                                managerHD.Edit(sc.next());
+                                break;
+                            case 3:
+                                System.out.print("Nhập mã hóa đơn cần xóa: ");
+                                managerHD.Delete(sc.next());
+                                break;
+                            case 4:
+                                System.out.print("Nhập mã hóa đơn cần tìm: ");
+                                managerHD.FindMHD(sc.next());
+                                break;
+                            case 5:
+                                managerHD.SortHoaDon();
+                                break;
+                            case 6:
+                                managerHD.show();
+                                break;
+                            case 7:
+                                cont5= false;
+                                break;
+                        }
+                    }while (cont5);
+
                     break;
 
                 case 5:
