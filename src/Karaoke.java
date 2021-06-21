@@ -4,34 +4,6 @@ import java.util.Scanner;
 
 public class Karaoke {
     public static void main(String[] args) {
-//        NhanVien nv1, nv2, nv3 = new NhanVien();
-//        nv1 = new QuanLyNhanVien.NhanVienFullTime("NV001", "Nguyễn Văn Quyết1", "28/08/2001", "Nam");
-//        nv1.setChucVu(1);
-//
-//        nv2 = new QuanLyNhanVien.NhanVienFullTime("NV002", "Nguyễn Văn Quyết2", "28/08/2001", "Nam", 10);
-//
-//        nv3 = new QuanLyNhanVien.NhanVienPartTime("NV003", "Nguyễn Văn Quyết3", "28/08/2001", "Nam", 150);
-//
-////        nv1.TinhLuong();
-////        nv2.TinhLuong();
-////        nv3.TinhLuong();
-//
-//
-//        nv1.Show();
-//        nv2.Show();
-//        nv3.Show();
-
-
-//        NhanVienManager manager = new NhanVienManager();
-//
-//        manager.Add();
-//        manager.show();
-
-//        NhanVienManager manager = new NhanVienManager();
-//
-//        manager.Delete("1");
-//        manager.show();
-
 
         int x = 0;
         Scanner sc = new Scanner(System.in);
@@ -191,6 +163,49 @@ public class Karaoke {
                     }while (cont3);
                     break;
                 case 3:
+
+                    NhaCungCapManager managerNCC = new NhaCungCapManager();
+
+                    boolean cont4 = true;
+                    do{
+                        System.out.println("___________________QUẢN LÝ NHÀ CUNG CẤP___________________");
+                        System.out.println("1, Thêm");
+                        System.out.println("2, Sửa");
+                        System.out.println("3, Xóa");
+                        System.out.println("4, Tìm kiếm");
+                        System.out.println("5, Sắp xếp (Theo tên)");
+                        System.out.println("6, Hiển thị danh sách");
+                        System.out.println("7, Quay lại");
+
+                        int y = 0;
+                        y = sc.nextInt();
+                        switch (y){
+                            case 1:
+                                managerNCC.Add();
+                                break;
+                            case 2:
+                                System.out.print("Nhập mã nhà cung cấp cần sửa: ");
+                                managerNCC.Edit(sc.next());
+                                break;
+                            case 3:
+                                System.out.print("Nhập mã nhà cung cấp cần xóa: ");
+                                managerNCC.Delete(sc.next());
+                                break;
+                            case 4:
+                                System.out.print("Nhập mã hóa đơn cần tìm: ");
+                                managerNCC.FindMNCC(sc.next());
+                                break;
+                            case 5:
+                                managerNCC.SortByName();
+                                break;
+                            case 6:
+                                managerNCC.show();
+                                break;
+                            case 7:
+                                cont4= false;
+                                break;
+                        }
+                    }while (cont4);
 
                     break;
 

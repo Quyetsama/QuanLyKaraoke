@@ -1,16 +1,17 @@
 import java.io.Serializable;
 
 public class NhanVien implements Serializable {
-    protected String mnv, ht, ns, gt;
+    protected String mnv, ht, ns, gt, dt;
     protected long luong;
 
     public NhanVien(){}
 
-    public NhanVien(String mnv, String ht, String ns, String gt){
+    public NhanVien(String mnv, String ht, String ns, String gt, String dt){
         this.mnv = mnv;
         this.ht = ht;
         this.ns = ns;
         this.gt = gt;
+        this.dt = dt;
     }
 
     public String loaiNhanVien(){
@@ -33,7 +34,7 @@ public class NhanVien implements Serializable {
 //        System.out.println("Giới tính: " + this.gt);
 //        System.out.println("Lương: " + this.luong);
 
-        System.out.format("%20s %20s %40s %20s %20s %20s \n", this.mnv, this.ht, this.loaiNhanVien(), this.ns, this.gt, this.luong);
+        System.out.format("%20s %40s %40s %20s %20s %20s %20s \n", this.mnv, this.ht, this.loaiNhanVien(), this.ns, this.gt, this.dt, this.luong);
     }
 
     public String getMnv() {
@@ -66,6 +67,14 @@ public class NhanVien implements Serializable {
 
     public void setGt(String gt) {
         this.gt = gt;
+    }
+
+    public String getDt() {
+        return dt;
+    }
+
+    public void setDt(String dt) {
+        this.dt = dt;
     }
 
     public long getLuong() {
@@ -102,15 +111,15 @@ class NhanVienFullTime extends NhanVien{
 
 // Đa hình ở constructor
 
-    public NhanVienFullTime(String mnv, String ht, String ns, String gt, int ngayLamThem) {
-        super(mnv, ht, ns, gt);
+    public NhanVienFullTime(String mnv, String ht, String ns, String gt, String dt, int ngayLamThem) {
+        super(mnv, ht, ns, gt, dt);
         this.ngayLamThem = ngayLamThem;
         this.chucVu = Configs.NHAN_VIEN_FULLTIME; //Mặc định là fulltime
 
 //        this.TinhLuong();
     }
-    public NhanVienFullTime(String mnv, String ht, String ns, String gt) {
-        super(mnv, ht, ns, gt);
+    public NhanVienFullTime(String mnv, String ht, String ns, String gt, String dt) {
+        super(mnv, ht, ns, gt, dt);
         this.chucVu = Configs.NHAN_VIEN_FULLTIME;
 
 //        this.TinhLuong();
@@ -168,8 +177,8 @@ class NhanVienPartTime extends NhanVien{
 
     public NhanVienPartTime(){}
 
-    public NhanVienPartTime(String mnv, String ht, String ns, String gt, int gioLamViec) {
-        super(mnv, ht, ns, gt);
+    public NhanVienPartTime(String mnv, String ht, String ns, String gt, String dt, int gioLamViec) {
+        super(mnv, ht, ns, gt, dt);
         this.gioLamViec = gioLamViec;
 
 //        this.TinhLuong();

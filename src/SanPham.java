@@ -5,19 +5,21 @@ public class SanPham implements Serializable {
     private String tenSP;
     private int soLuong;
     private float donGia;
+    private String mancc;
 
     public SanPham() {
     }
 
-    public SanPham(String msp, String tenSP, int soLuong, float donGia) {
+    public SanPham(String msp, String tenSP, int soLuong, float donGia, String mancc) {
         this.msp = msp;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.donGia = donGia;
+        this.mancc = mancc;
     }
 
     public void Show(){
-        System.out.format("%20s %20s %20s %20s \n", this.msp, this.tenSP, this.soLuong, this.donGia);
+        System.out.format("%20s %20s %20s %20s %20s \n", this.msp, this.tenSP, this.soLuong, this.donGia, this.mancc);
     }
 
     public String getMsp() {
@@ -50,5 +52,13 @@ public class SanPham implements Serializable {
 
     public void setDonGia(float donGia) {
         this.donGia = donGia;
+    }
+
+    public String getMancc() {
+        return mancc;
+    }
+
+    public void setMancc(String mancc) {
+        this.mancc = mancc;
     }
 }

@@ -14,7 +14,7 @@ public class NhanVienManager {
 
     public void Add(){
         int chucVu;
-        String mnv, ht, ns, gt;
+        String mnv, ht, ns, gt, dt;
         long luong;
 
 
@@ -33,12 +33,12 @@ public class NhanVienManager {
 
 
 
-
-//        mnv = scanner.next();
-        System.out.print("Họ tên: "); ht = scanner.next();
         scanner.nextLine();
-        System.out.print("Ngày sinh: "); ns = scanner.next();
-        System.out.print("Giới tính: "); gt = scanner.next();
+//        mnv = scanner.next();
+        System.out.print("Họ tên: "); ht = scanner.nextLine();
+        System.out.print("Ngày sinh: "); ns = scanner.nextLine();
+        System.out.print("Giới tính: "); gt = scanner.nextLine();
+        System.out.print("Địa chỉ: "); dt = scanner.nextLine();
 
         NhanVien nv;
 
@@ -47,10 +47,10 @@ public class NhanVienManager {
             System.out.print("Số ngày làm thêm: "); lamThem = scanner.nextInt();
 
             if(lamThem > 0){
-                nv = new NhanVienFullTime(mnv, ht, ns, gt, lamThem);
+                nv = new NhanVienFullTime(mnv, ht, ns, gt, dt, lamThem);
             }
             else {
-                nv = new NhanVienFullTime(mnv, ht, ns, gt);
+                nv = new NhanVienFullTime(mnv, ht, ns, gt, dt);
             }
 
             nv.setChucVu(1);
@@ -60,16 +60,16 @@ public class NhanVienManager {
             System.out.print("Số ngày làm thêm: "); lamThem = scanner.nextInt();
 
             if(lamThem > 0){
-                nv = new NhanVienFullTime(mnv, ht, ns, gt, lamThem);
+                nv = new NhanVienFullTime(mnv, ht, ns, gt, dt, lamThem);
             }
             else {
-                nv = new NhanVienFullTime(mnv, ht, ns, gt);
+                nv = new NhanVienFullTime(mnv, ht, ns, gt, dt);
             }
         }
         else {
             int gioLam;
             System.out.print("Số giờ làm việc: "); gioLam = scanner.nextInt();
-            nv = new NhanVienPartTime(mnv, ht, ns, gt, gioLam);
+            nv = new NhanVienPartTime(mnv, ht, ns, gt, dt, gioLam);
         }
 
         nv.TinhLuong();
@@ -82,38 +82,43 @@ public class NhanVienManager {
         boolean isExisted = false;
         int size = nhanVienList.size();
         for (int i = 0; i < size; i++) {
-            if (nhanVienList.get(i).getMnv().equals(mnv)) {
+            if (nhanVienList.get(i).getMnv().equals(mnv.trim())) {
                 isExisted = true;
 
                 NhanVien nv;
 
                 int chucVu;
                 String chucVu1;
-                String ht, ns, gt;
+                String ht, ns, gt, dt;
                 int lamThem, lamViec;
 
 
-                System.out.print("Chức vụ (1: Quản lý, 2: FullTime, 3: PartTime) - nhập 'k' để bỏ qua: "); chucVu1 = scanner.next();
+                System.out.print("Chức vụ (1: Quản lý, 2: FullTime, 3: PartTime) - nhập 'k' để bỏ qua: "); chucVu1 = scanner.nextLine();
                 if(chucVu1.equals("k")){
                     chucVu = nhanVienList.get(i).getChucVu();
                 }else {
                     chucVu = Integer.parseInt(chucVu1);
                 }
 
-                System.out.print("Họ tên - nhập 'k' để bỏ qua: "); ht = scanner.next();
+                System.out.print("Họ tên - nhập 'k' để bỏ qua: "); ht = scanner.nextLine();
                 if(ht.equals("k")){
                     ht = nhanVienList.get(i).getHt();
                 }
 
-                System.out.print("Ngày sinh - nhập 'k' để bỏ qua: "); ns = scanner.next();
+                System.out.print("Ngày sinh - nhập 'k' để bỏ qua: "); ns = scanner.nextLine();
                 if(ns.equals("k")){
                     ns = nhanVienList.get(i).getNs();
                 }
 
 
-                System.out.print("Giới tính - nhập 'k' để bỏ qua: "); gt = scanner.next();
+                System.out.print("Giới tính - nhập 'k' để bỏ qua: "); gt = scanner.nextLine();
                 if(gt.equals("k")){
                     gt = nhanVienList.get(i).getGt();
+                }
+
+                System.out.print("Địa chỉ - nhập 'k' để bỏ qua: "); dt = scanner.nextLine();
+                if(dt.equals("k")){
+                    dt = nhanVienList.get(i).getDt();
                 }
 
 
@@ -123,10 +128,10 @@ public class NhanVienManager {
                     System.out.print("Số ngày làm thêm: "); lamThem = scanner.nextInt();
 
                     if(lamThem > 0){
-                        nv = new NhanVienFullTime(mnv, ht, ns, gt, lamThem);
+                        nv = new NhanVienFullTime(mnv, ht, ns, gt, dt, lamThem);
                     }
                     else {
-                        nv = new NhanVienFullTime(mnv, ht, ns, gt);
+                        nv = new NhanVienFullTime(mnv, ht, ns, gt, dt);
                     }
 
                     nv.setChucVu(1);
@@ -136,10 +141,10 @@ public class NhanVienManager {
                 else if(chucVu == 2){
                     System.out.print("Số ngày làm thêm: "); lamThem = scanner.nextInt();
                     if(lamThem > 0){
-                        nv = new NhanVienFullTime(mnv, ht, ns, gt, lamThem);
+                        nv = new NhanVienFullTime(mnv, ht, ns, gt, dt, lamThem);
                     }
                     else {
-                        nv = new NhanVienFullTime(mnv, ht, ns, gt);
+                        nv = new NhanVienFullTime(mnv, ht, ns, gt, dt);
                     }
 
 
@@ -147,7 +152,7 @@ public class NhanVienManager {
                 else {
                     System.out.print("Số giờ làm việc: "); lamViec = scanner.nextInt();
 
-                    nv = new NhanVienPartTime(mnv, ht, ns, gt, lamViec);
+                    nv = new NhanVienPartTime(mnv, ht, ns, gt, dt, lamViec);
 
 
                 }
@@ -199,7 +204,7 @@ public class NhanVienManager {
         nhanVienDAO.write(listSort, "sortSalary.txt");
 
         System.out.println("______________________Danh sách nhân viên______________________");
-        System.out.format("%20s %20s %40s %20s %20s %20s \n", "Mã nhân viên", "Họ tên", "Chức vụ", "Ngày sinh", "Giới tính", "Lương");
+        System.out.format("%20s %40s %40s %20s %20s %20s %20s \n", "Mã nhân viên", "Họ tên", "Chức vụ", "Ngày sinh", "Giới tính", "Địa chỉ", "Lương");
         for (NhanVien nhanVien : listSort) {
             nhanVien.Show();
         }
@@ -222,7 +227,7 @@ public class NhanVienManager {
         nhanVienDAO.write(listSort, "sortName.txt");
 
         System.out.println("______________________Danh sách nhân viên______________________");
-        System.out.format("%20s %20s %40s %20s %20s %20s \n", "Mã nhân viên", "Họ tên", "Chức vụ", "Ngày sinh", "Giới tính", "Lương");
+        System.out.format("%20s %40s %40s %20s %20s %20s %20s \n", "Mã nhân viên", "Họ tên", "Chức vụ", "Ngày sinh", "Giới tính", "Địa chỉ", "Lương");
         for (NhanVien nhanVien : listSort) {
             nhanVien.Show();
         }
@@ -230,7 +235,7 @@ public class NhanVienManager {
 
     public void FindMNV(String mnv){
         System.out.println("______________________Danh sách tìm kiếm nhân viên______________________");
-        System.out.format("%20s %20s %40s %20s %20s %20s \n", "Mã nhân viên", "Họ tên", "Chức vụ", "Ngày sinh", "Giới tính", "Lương");
+        System.out.format("%20s %40s %40s %20s %20s %20s %20s \n", "Mã nhân viên", "Họ tên", "Chức vụ", "Ngày sinh", "Giới tính", "Địa chỉ", "Lương");
 
         List<NhanVien> listFind = new ArrayList<>(nhanVienList);
         for(int i = 0 ; i < listFind.size() ; i ++){
@@ -242,7 +247,7 @@ public class NhanVienManager {
 
     public void FindName(String name){
         System.out.println("______________________Danh sách tìm kiếm nhân viên______________________");
-        System.out.format("%20s %20s %40s %20s %20s %20s \n", "Mã nhân viên", "Họ tên", "Chức vụ", "Ngày sinh", "Giới tính", "Lương");
+        System.out.format("%20s %40s %40s %20s %20s %20s %20s \n", "Mã nhân viên", "Họ tên", "Chức vụ", "Ngày sinh", "Giới tính", "Địa chỉ", "Lương");
 
         List<NhanVien> listFind = new ArrayList<>(nhanVienList);
         for(int i = 0 ; i < listFind.size() ; i ++){
@@ -254,7 +259,7 @@ public class NhanVienManager {
 
     public void show() {
         System.out.println("______________________Danh sách nhân viên______________________");
-        System.out.format("%20s %20s %40s %20s %20s %20s \n", "Mã nhân viên", "Họ tên", "Chức vụ", "Ngày sinh", "Giới tính", "Lương");
+        System.out.format("%20s %40s %40s %20s %20s %20s %20s \n", "Mã nhân viên", "Họ tên", "Chức vụ", "Ngày sinh", "Giới tính", "Địa chỉ", "Lương");
         for (NhanVien nhanVien : nhanVienList) {
             nhanVien.Show();
         }

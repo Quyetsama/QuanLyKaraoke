@@ -52,7 +52,7 @@ public class HoaDonManager {
         }
         System.out.print("): ");
         do{
-            mnv = scanner.next();
+            mnv = scanner.nextLine();
         }while (!CheckMNV(mnv));
 
 
@@ -101,7 +101,7 @@ public class HoaDonManager {
                 }
                 System.out.print("): ");
                 do{
-                    mnv = scanner.next();
+                    mnv = scanner.nextLine();
 
                     if(mnv.equals("k")){
                         break;
@@ -112,18 +112,18 @@ public class HoaDonManager {
                     mnv = hoaDonList.get(i).getMnv();
                 }
 
-                System.out.print("Số phòng - nhập 'k' để bỏ qua: "); sPhong = scanner.next();
+                System.out.print("Số phòng - nhập 'k' để bỏ qua: "); sPhong = scanner.nextLine();
                 if(sPhong.equals("k")){
                     sPhong = String.valueOf(hoaDonList.get(i).getsPhong());
                 }
 
-                System.out.print("Loại phòng - nhập 'k' để bỏ qua: "); lPhong = scanner.next();
+                System.out.print("Loại phòng - nhập 'k' để bỏ qua: "); lPhong = scanner.nextLine();
                 if(lPhong.equals("k")){
                     lPhong = String.valueOf(hoaDonList.get(i).getLphong());
                 }
 
 
-                System.out.print("Số giờ - nhập 'k' để bỏ qua: "); sGio = scanner.next();
+                System.out.print("Số giờ - nhập 'k' để bỏ qua: "); sGio = scanner.nextLine();
                 if(sGio.equals("k")){
                     sGio = String.valueOf(hoaDonList.get(i).getsGio());
                 }
@@ -200,7 +200,6 @@ public class HoaDonManager {
             }
         }
     }
-
 
     public void show() {
         System.out.println("______________________Danh sách hóa đơn______________________");
