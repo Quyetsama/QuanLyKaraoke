@@ -4,10 +4,11 @@ public class HoaDon implements Serializable {
     private String mhd;
     private int sPhong, lphong, sGio;
     private float thanhTien;
+    private String mnv;
 
     public HoaDon(){}
 
-    public HoaDon(String mhd, int sPhong, int lphong, int sGio) {
+    public HoaDon(String mhd, int sPhong, int lphong, int sGio, String mnv) {
         this.mhd = mhd;
         this.sPhong = sPhong;
         this.lphong = lphong;
@@ -18,10 +19,11 @@ public class HoaDon implements Serializable {
         }else {
             this.thanhTien = 50000 * sGio;
         }
+        this.mnv = mnv;
     }
 
     public void Show(){
-        System.out.format("%20s %20s %20s %20s %20s \n", this.mhd, this.sPhong, this.lphong, this.sGio, this.thanhTien);
+        System.out.format("%20s %20s %20s %20s %20s %20s \n", this.mhd, this.mnv, this.sPhong, this.lphong, this.sGio, this.thanhTien);
     }
 
     public String getMhd() {
@@ -66,5 +68,13 @@ public class HoaDon implements Serializable {
         }else {
             this.thanhTien = 50000 * this.sGio;
         }
+    }
+
+    public String getMnv() {
+        return mnv;
+    }
+
+    public void setMnv(String mnv) {
+        this.mnv = mnv;
     }
 }

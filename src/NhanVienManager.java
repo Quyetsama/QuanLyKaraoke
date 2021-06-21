@@ -259,4 +259,8 @@ public class NhanVienManager {
             nhanVien.Show();
         }
     }
+
+    public List<NhanVien> getNhanVienList() {
+        return nhanVienList;
+    }
 }
