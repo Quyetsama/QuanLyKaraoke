@@ -91,7 +91,7 @@ public class NhaCungCapManager {
             }
         }
         if(!isExisted) {
-            System.out.println("Mã nhà cung cấp không hợp lê!");
+            System.out.println("Mã nhà cung cấp không hợp lệ!");
         }else {
             nhaCungCapDAO.write(nhaCungCapList);
         }
@@ -111,7 +111,7 @@ public class NhaCungCapManager {
             nhaCungCapDAO.write(nhaCungCapList);
         }
         else {
-            System.out.println("Mã nhà cung cấp không hợp lê!");
+            System.out.println("Mã nhà cung cấp không hợp lệ!");
         }
     }
 
@@ -128,7 +128,7 @@ public class NhaCungCapManager {
             }
         }
 
-        // Ghi danh sách đã sắp xếp vào file
+        // Ghi danh sach da sap xep vao file
         nhaCungCapDAO.write(listSort, "SortNhaCungCap.txt");
 
         System.out.println("______________________Danh sách nhà cung cấp______________________");
@@ -139,7 +139,7 @@ public class NhaCungCapManager {
     }
 
     public void FindMNCC(String mncc){
-        System.out.println("______________________Danh sách nhà cung cấp______________________");
+        System.out.println("______________________Danh sách tìm kiếm nhà cung cấp______________________");
         System.out.format("%20s %20s %20s %20s \n", "Mã nhà cung cấp", "Tên nhà cung cấp", "Số điện thoại", "Địa chỉ");
 
         List<NhaCungCap> listFind = new ArrayList<>(nhaCungCapList);
@@ -163,3 +163,4 @@ public class NhaCungCapManager {
         return nhaCungCapList;
     }
 }
+

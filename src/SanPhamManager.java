@@ -27,7 +27,7 @@ public class SanPhamManager {
     public void Add() {
         String msp;
 
-        System.out.print("Mã sản phẩm: ");
+        System.out.print("mã sản phẩm: ");
         String[] s = null;
         if(sanphamList.size() == 0){
             msp = "SP1";
@@ -41,26 +41,27 @@ public class SanPhamManager {
         String tenSP = scanner.nextLine();
 
         System.out.print("Số lượng: ");
-        int soLuong = scanner.nextInt();
+        int soLuong = nhapSoLuong();
 
         System.out.print("Đơn giá: ");
-        float donGia = scanner.nextFloat();
+        float donGia = nhapDonGia();
 
-        scanner.nextLine();
 
-        System.out.print("Nhà cung cấp (");
+        
         NhaCungCapManager managerNCC = new NhaCungCapManager();
         String mncc;
+        String dsNCC = "";
 
 
         for(int i = 0; i < managerNCC.getNhaCungCapList().size(); i++){
             if(i==0){
-                System.out.print("" + managerNCC.getNhaCungCapList().get(i).getMncc());
+                dsNCC += "" + managerNCC.getNhaCungCapList().get(i).getMncc();
             }else {
-                System.out.print(", " + managerNCC.getNhaCungCapList().get(i).getMncc());
+                dsNCC +=", " + managerNCC.getNhaCungCapList().get(i).getMncc();
             }
         }
-        System.out.print("): ");
+        
+        System.out.print("Nhà cung cấp (" + dsNCC + "): ");
         do{
             mncc = scanner.nextLine();
         }while (!CheckMNCC(mncc));
@@ -80,8 +81,10 @@ public class SanPhamManager {
                 SanPham sp;
 
                 String tenSP;
-                String sl;
-                String donGia;
+                int sl;
+                String sl1;
+                float donGia;
+                String donGia1;
                 String mncc;
 
 
@@ -91,30 +94,57 @@ public class SanPhamManager {
                     tenSP = sanphamList.get(i).getTenSP();
                 }
 
-                System.out.print("Số lượng - nhập 'k' để bỏ qua: "); sl = scanner.nextLine();
-                if(sl.equals("k")){
-                    sl = String.valueOf(sanphamList.get(i).getSoLuong());
+                System.out.print("Số lượng - nhập 'k' để bỏ qua: ");
+                
+                while(true){
+                    try{
+                        sl1 = scanner.nextLine();
+                        if(sl1.equals("k")){
+                            sl = sanphamList.get(i).getSoLuong();
+                        }else{
+                            sl = Integer.parseInt(sl1);
+                        }
+                        break;
+                    }catch(NumberFormatException ex){
+                        System.out.print("Lỗi định dạng, vui lòng nhập lại: ");
+                    }
                 }
+                
 
 
-                System.out.print("Đơn giá - nhập 'k' để bỏ qua: "); donGia = scanner.nextLine();
-                if(donGia.equals("k")){
-                    donGia = String.valueOf(sanphamList.get(i).getDonGia());
+                System.out.print("Đơn giá - nhập 'k' để bỏ qua: ");
+                
+                while(true){
+                    try{
+                        donGia1 = scanner.nextLine();
+                        if(donGia1.equals("k")){
+                            donGia = sanphamList.get(i).getDonGia();
+                        }else{
+                            donGia = Float.parseFloat(donGia1);
+                        }
+                        break;
+                    }catch(NumberFormatException ex){
+                        System.out.print("Lỗi định dạng, vui lòng nhập lại: ");
+                    }
                 }
+                
+                
 
 
-                System.out.print("Nhà cung cấp - nhập 'k' để bỏ qua (");
+                
                 NhaCungCapManager managerNCC = new NhaCungCapManager();
+                String dsNCC = "";
 
 
                 for(int j = 0; j < managerNCC.getNhaCungCapList().size(); j++){
                     if(j==0){
-                        System.out.print("" + managerNCC.getNhaCungCapList().get(j).getMncc());
+                        dsNCC += "" + managerNCC.getNhaCungCapList().get(j).getMncc();
                     }else {
-                        System.out.print(", " + managerNCC.getNhaCungCapList().get(j).getMncc());
+                        dsNCC += ", " + managerNCC.getNhaCungCapList().get(j).getMncc();
                     }
                 }
-                System.out.print("): ");
+                
+                System.out.print("Nhà cung cấp - nhập 'k' để bỏ qua (" + dsNCC + "): ");
                 do{
                     mncc = scanner.nextLine();
 
@@ -129,7 +159,7 @@ public class SanPhamManager {
 
 
 
-                sp = new SanPham(msp, tenSP, Integer.parseInt(sl), Float.parseFloat(donGia), mncc);
+                sp = new SanPham(msp, tenSP, sl, donGia, mncc);
 
 
                 sanphamList.set(i,sp);
@@ -138,7 +168,7 @@ public class SanPhamManager {
             }
         }
         if(!isExisted) {
-            System.out.println("Mã sản phẩm không hợp lê!");
+            System.out.println("Mã sản phẩm không hợp lệ!");
         }else {
             sanphamDAO.write(sanphamList);
         }
@@ -158,7 +188,31 @@ public class SanPhamManager {
             sanphamDAO.write(sanphamList);
         }
         else {
-            System.out.println("Mã sản phẩm không hợp lê!");
+            System.out.println("Mã sản phẩm không hợp lệ!");
+        }
+    }
+    
+    public int nhapSoLuong(){
+        int chucvu;
+        while(true){
+            try{
+                chucvu = Integer.parseInt(scanner.nextLine());
+                return chucvu;
+            }catch(NumberFormatException ex){
+                System.out.print("Lỗi định dạng, vui lòng nhập lại: ");
+            }
+        }
+    }
+    
+    public float nhapDonGia(){
+        float dongia;
+        while(true){
+            try{
+                dongia = Float.parseFloat(scanner.nextLine());
+                return dongia;
+            }catch(NumberFormatException ex){
+                System.out.print("Lỗi định dạng, vui lòng nhập lại: ");
+            }
         }
     }
 
@@ -175,7 +229,7 @@ public class SanPhamManager {
             }
         }
 
-        // Ghi danh sách đã sắp xếp vào file
+        // Ghi danh sach da sap xep vao file
         sanphamDAO.write(listSort, "sortSanPhamPrice.txt");
 
         System.out.println("______________________Danh sách sản phẩm______________________");
@@ -198,7 +252,7 @@ public class SanPhamManager {
             }
         }
 
-        // Ghi danh sách đã sắp xếp vào file
+        // Ghi danh sach da sap xep vao file
         sanphamDAO.write(listSort, "SortSanPhamName.txt");
 
         System.out.println("______________________Danh sách sản phẩm______________________");
@@ -242,3 +296,4 @@ public class SanPhamManager {
     }
 
 }
+

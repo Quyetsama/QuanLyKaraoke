@@ -38,19 +38,22 @@ public class HoaDonManager {
         }
         System.out.println(mhd);
 
-        System.out.print("Nhân viên lập hóa đơn (");
+        
         NhanVienManager managerNV = new NhanVienManager();
         String mnv;
-//        managerNV.show();
+        String dsNV = "";
 
         for(int i = 0; i < managerNV.getNhanVienList().size(); i++){
             if(i==0){
-                System.out.print("" + managerNV.getNhanVienList().get(i).getMnv());
+                dsNV += "" + managerNV.getNhanVienList().get(i).getMnv();
             }else {
-                System.out.print(", " + managerNV.getNhanVienList().get(i).getMnv());
+                dsNV += ", " + managerNV.getNhanVienList().get(i).getMnv();
             }
         }
-        System.out.print("): ");
+        
+        
+        
+        System.out.print("Nhân viên lập hóa đơn (" + dsNV + "): ");
         do{
             mnv = scanner.nextLine();
         }while (!CheckMNV(mnv));
@@ -61,13 +64,14 @@ public class HoaDonManager {
 
 
         System.out.print("Số phòng: ");
-        int sPhong = scanner.nextInt();
+        int sPhong = nhapSo();
 
-        System.out.print("Loại Phòng (0: Thường 50K/h, 1: VIP 70K/h): ");
-        int lPhong = scanner.nextInt();
+        System.out.print("Loại phòng (0: Thường 50K/h, 1: VIP 70K/h): ");
+        int lPhong = nhapSo();
 
         System.out.print("Số giờ: ");
-        int sGio = scanner.nextInt();
+        int sGio = nhapSo();
+        
 
 
 
@@ -85,21 +89,24 @@ public class HoaDonManager {
 
                 HoaDon hd;
 
-                String sPhong, lPhong, sGio, mnv;
+                String sPhong1, lPhong1, sGio1, mnv;
+                int sPhong, lPhong, sGio;
 
 
-                System.out.print("Nhân viên lập hóa đơn - nhập 'k' để bỏ qua (");
+                
                 NhanVienManager managerNV = new NhanVienManager();
+                String dsNV = "";
 
 
                 for(int j = 0; j < managerNV.getNhanVienList().size(); j++){
                     if(j==0){
-                        System.out.print("" + managerNV.getNhanVienList().get(j).getMnv());
+                        dsNV += "" + managerNV.getNhanVienList().get(j).getMnv();
                     }else {
-                        System.out.print(", " + managerNV.getNhanVienList().get(j).getMnv());
+                        dsNV += ", " + managerNV.getNhanVienList().get(j).getMnv();
                     }
                 }
-                System.out.print("): ");
+
+                System.out.print("Nhân viên lập hóa đơn - nhập 'k' để bỏ qua (" + dsNV + "): ");
                 do{
                     mnv = scanner.nextLine();
 
@@ -112,28 +119,62 @@ public class HoaDonManager {
                     mnv = hoaDonList.get(i).getMnv();
                 }
 
-                System.out.print("Số phòng - nhập 'k' để bỏ qua: "); sPhong = scanner.nextLine();
-                if(sPhong.equals("k")){
-                    sPhong = String.valueOf(hoaDonList.get(i).getsPhong());
+                System.out.print("Số phòng - nhập 'k' để bỏ qua: ");
+                
+                while(true){
+                    try{
+                        sPhong1 = scanner.nextLine();
+                        if(sPhong1.equals("k")){
+                            sPhong = hoaDonList.get(i).getsPhong();
+                        }else{
+                            sPhong = Integer.parseInt(sPhong1);
+                        }
+                        break;
+                    }catch(NumberFormatException ex){
+                        System.out.println("Lỗi: ");
+                    }
+                }
+                
+                
+
+                System.out.print("Loại phòng - nhập 'k' để bỏ qua: ");
+                while(true){
+                    try{
+                        lPhong1 = scanner.nextLine();
+                        if(lPhong1.equals("k")){
+                            lPhong = hoaDonList.get(i).getLphong();
+                        }else{
+                            lPhong = Integer.parseInt(lPhong1);
+                        }
+                        break;
+                    }catch(NumberFormatException ex){
+                        System.out.print("Lỗi định dạng, vui lòng nhập lại: ");
+                    }
                 }
 
-                System.out.print("Loại phòng - nhập 'k' để bỏ qua: "); lPhong = scanner.nextLine();
-                if(lPhong.equals("k")){
-                    lPhong = String.valueOf(hoaDonList.get(i).getLphong());
+
+                System.out.print("Số giờ - nhập 'k' để bỏ qua: ");
+                while(true){
+                    try{
+                        sGio1 = scanner.nextLine();
+                        if(sGio1.equals("k")){
+                            sGio = hoaDonList.get(i).getsGio();
+                        }else{
+                            sGio = Integer.parseInt(sGio1);
+                        }
+                        break;
+                    }catch(NumberFormatException ex){
+                        System.out.print("Lỗi định dạng, vui lòng nhập lại: ");
+                    }
                 }
-
-
-                System.out.print("Số giờ - nhập 'k' để bỏ qua: "); sGio = scanner.nextLine();
-                if(sGio.equals("k")){
-                    sGio = String.valueOf(hoaDonList.get(i).getsGio());
-                }
+                
 
 
 
 
 
 
-                hd = new HoaDon(mhd, Integer.parseInt(sPhong), Integer.parseInt(lPhong), Integer.parseInt(sGio), mnv);
+                hd = new HoaDon(mhd, sPhong, lPhong, sGio, mnv);
 
 
                 hoaDonList.set(i,hd);
@@ -142,7 +183,7 @@ public class HoaDonManager {
             }
         }
         if(!isExisted) {
-            System.out.println("Mã hóa đơn không hợp lê!");
+            System.out.println("Mã hóa đơn không hợp lệ!");
         }else {
             hoaDonDAO.write(hoaDonList);
         }
@@ -162,7 +203,19 @@ public class HoaDonManager {
             hoaDonDAO.write(hoaDonList);
         }
         else {
-            System.out.println("Mã hóa đơn không hợp lê!");
+            System.out.println("Mã hóa đơn không hợp lệ!");
+        }
+    }
+    
+    public int nhapSo(){
+        int chucvu;
+        while(true){
+            try{
+                chucvu = Integer.parseInt(scanner.nextLine());
+                return chucvu;
+            }catch(NumberFormatException ex){
+                System.out.print("Lỗi định dạng, vui lòng nhập lại: ");
+            }
         }
     }
 
@@ -179,11 +232,11 @@ public class HoaDonManager {
             }
         }
 
-        // Ghi danh sách đã sắp xếp vào file
+        // Ghi danh sach da sap xep vao file
         hoaDonDAO.write(listSort, "SortHoaDon.txt");
 
         System.out.println("______________________Danh sách hóa đơn______________________");
-        System.out.format("%20s %20s %20s %20s %20s %20s \n", "Mã hóa đơn", "Nhân viên lập hóa đơn", "Số phòng", "Loại phòng", "Số giờ", "Thành tiền");
+        System.out.format("%20s %20s %20s %20s %20s %20s \n", "Mã hóa đơn", "Nhân viên lập", "Số phòng", "Loại phòng", "Số giờ", "Thành tiền");
         for (HoaDon hoaDon : listSort) {
             hoaDon.Show();
         }
@@ -191,7 +244,7 @@ public class HoaDonManager {
 
     public void FindMHD(String mhd){
         System.out.println("______________________Danh sách tìm kiếm hóa đơn______________________");
-        System.out.format("%20s %20s %20s %20s %20s %20s \n", "Mã hóa đơn", "Nhân viên lập hóa đơn", "Số phòng", "Loại phòng", "Số giờ", "Thành tiền");
+        System.out.format("%20s %20s %20s %20s %20s %20s \n", "Mã hóa đơn", "Nhân viên lập", "Số phòng", "Loại phòng", "Số giờ", "Thành tiền");
 
         List<HoaDon> listFind = new ArrayList<>(hoaDonList);
         for(int i = 0 ; i < listFind.size() ; i ++){
@@ -203,10 +256,11 @@ public class HoaDonManager {
 
     public void show() {
         System.out.println("______________________Danh sách hóa đơn______________________");
-        System.out.format("%20s %20s %20s %20s %20s %20s \n", "Mã hóa đơn", "Nhân viên lập hóa đơn", "Số phòng", "Loại phòng", "Số giờ", "Thành tiền");
+        System.out.format("%20s %20s %20s %20s %20s %20s \n", "Mã hóa đơn", "Nhân viên lập", "Số phòng", "Loại phòng", "Số giờ", "Thành tiền");
         for (HoaDon hd : hoaDonList) {
             hd.Show();
 
         }
     }
 }
+
